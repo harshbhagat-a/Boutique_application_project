@@ -21,6 +21,9 @@ jobs:
     - name: Verify Cluster
       run: |
         kubectl get nodes
+    - name: Clone Microservices Demo
+      run: |
+        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
     - name: Deploy Application
       run: |
         kubectl apply -f microservices-demo/release/kubernetes-manifests.yaml
