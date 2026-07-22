@@ -26,7 +26,7 @@ export class HomePage {
     async verifyHomePageNavigate() {
         await this.page.goto('/');
         await expect(this.page).toHaveTitle(/Online Boutique/i);
-        await expect(this.currencyDropdown).toBeVisible();
+        await expect(this.applicationLogo).toBeVisible();
     }
 
     async verifyHomePageElements(){
@@ -37,8 +37,6 @@ export class HomePage {
         for (const locator of locators) {
             await expect(locator).toBeVisible();
         }
-
-
     }
 
 }

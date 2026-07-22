@@ -9,7 +9,7 @@ test.describe('Homepage Functionality', () => {
   });
 
   test('Verify home page elements', async ({ homepage }) => {
-    homepage.verifyHomePageElements();
+     await homepage.verifyHomePageElements();
   });
 
 
