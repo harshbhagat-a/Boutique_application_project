@@ -1,5 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { testdata } from '../../utils/testdata';
 
 export class HomePage {
 
@@ -17,22 +16,25 @@ export class HomePage {
     productPrice: Locator;
     productDescription: Locator;
     quantityDropdown: Locator;
+    continueShoppingButton: Locator;
 
 
     constructor(private page: Page) {
         this.applicationLogo = this.page.locator('.top-left-logo');
         this.currencyDropdown = this.page.locator('#currency_form');
         this.cartIcon = this.page.getByTitle('Cart');
-        this.hotProductTitle = this.page.getByRole('heading',{ level:3 , name: 'Hot Products'});
+        this.hotProductTitle = this.page.getByRole('heading', { level: 3, name: 'Hot Products' });
         this.productCards = this.page.locator('.hot-product-card');
         this.footerSection = this.page.locator('.footer-social').first();
         this.localText = this.page.locator('.platform-flag');
-        this.addToCartButton = this.page.getByRole('button',{ name: 'Add To Cart'});
+        this.addToCartButton = this.page.getByRole('button', { name: 'Add To Cart' });
         this.productImage = this.page.locator('.product-image');
-        this.productNameHeading = this.page.getByRole('heading',{level: 2}).first();
+        this.productNameHeading = this.page.getByRole('heading', { level: 2 }).first();
         this.productPrice = this.page.locator('.product-price');
         this.productDescription = this.page.locator('.product-wrapper p').nth(1);
         this.quantityDropdown = this.page.locator('#quantity');
+        this.continueShoppingButton = this.page.getByRole('button', { name: ' Continue Shopping ' });
+
 
     }
 
@@ -42,7 +44,17 @@ export class HomePage {
         await expect(this.applicationLogo).toBeVisible();
     }
 
-    async verifyHomePageElements(){
+    async verifyProductDetailsPageElements() {
+        const locators: Locator[] = [
+            this.productImage, this.productNameHeading, this.productPrice,
+            this.productDescription, this.quantityDropdown, this.addToCartButton
+        ];
+        for (const locator of locators) {
+            await expect(locator).toBeVisible();
+        }
+    }
+
+    async verifyHomePageElements() {
         const locators: Locator[] = [
             this.applicationLogo, this.currencyDropdown, this.cartIcon, this.hotProductTitle,
             this.productCards.first(), this.localText, this.footerSection
@@ -53,26 +65,18 @@ export class HomePage {
     }
 
 
-    async verifyFirstProductClick(){
+    async verifyCartIconClick() {
+        await expect(this.cartIcon).toBeVisible();
+        await this.cartIcon.click();
+        await expect(this.continueShoppingButton).toBeVisible();
+    }
+
+
+    async verifyFirstProductClick() {
         const firstProductLocator = this.productCards.first()
         await expect(firstProductLocator).toBeVisible();
         await firstProductLocator.click();
         await expect(this.addToCartButton).toBeVisible();
     }
 
-    async verifyProductDetailsPageElements(){
-        const locators: Locator[] = [
-            this.productImage, this.productNameHeading, this.productPrice,
-            this.productDescription, this.quantityDropdown, this.addToCartButton
-        ];
-        for (const locator of locators) {
-            await expect(locator).toBeVisible();
-        }
-    }
-
-    async verifyQuantityDropdownOptionSelect(){
-        await expect(this.quantityDropdown).toBeVisible();
-        await this.quantityDropdown.click();
-        await this.quantityDropdown.selectOption(testdata.productQuantity);
-    }
 }
