@@ -13,6 +13,36 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    - name: Install Minikube
+      uses: medyagh/setup-minikube@latest
+    - name: Start Minikube
+      run: |
+        minikube start --driver=docker
+    - name: Verify Cluster
+      run: |
+        kubectl get nodes
+    - name: Clone Microservices Demo
+      run: |
+        git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+    - name: Deploy Application
+      run: |
+        kubectl apply -f microservices-demo/release/kubernetes-manifests.yaml
+    - name: Wait for Pods
+      run: |
+        kubectl wait \
+          --for=condition=Ready \
+          pods \
+          --all \
+          --timeout=300s  
+    - name: Verify Pods
+      run: |
+        kubectl get pods
+    - name: Get Frontend URL
+      run: |
+        echo "BASE_URL=$(minikube service frontend-external --url)" >> $GITHUB_ENV
+    - name: Print URL
+      run: |
+        echo $BASE_URL
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
