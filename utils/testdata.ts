@@ -16,5 +16,9 @@ export const testdata = {
 
     country: 'India',
 
+    creditCardNumber: '4111 1111 1111 1111',
+
+    creditCardCVV: '123',
+
 
 };

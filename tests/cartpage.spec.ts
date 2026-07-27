@@ -6,7 +6,6 @@ test.describe('Cart Page', () => {
 
     test.beforeEach(async ({ homepage, cart, productPage }) => {
         await homepage.verifyHomePageNavigate();
-        //await homepage.verifyCartIconClick();
         await homepage.verifyFirstProductClick();
         await productPage.verifyAddToCartButtonClick();
         const isCartEmpty = await cart.verifyCartEmpty();
@@ -18,34 +17,74 @@ test.describe('Cart Page', () => {
     });
 
 
-    test('Functionality of Email input field on Cart details page', async ({ cart }) => {
+    test('Functionality of Email input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.emailInputField, testdata.email);
         
     });
 
 
-    test('Functionality of Street Address input field on Cart details page', async ({ cart }) => {
+    test('Functionality of Street Address input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.streetAddressInputField, testdata.streetAddress);
     });
 
 
-    test('Functionality of Zip Code input field on Cart details page', async ({ cart }) => {
+    test('Functionality of Zip Code input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.zipCodeInputFiled, testdata.zipCode);
     });
 
 
-    test('Functionality of City input field on Cart details page', async ({ cart }) => {
+    test('Functionality of City input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.cityInputField, testdata.city);
     });
 
 
-    test('Functionality of State input field on Cart details page', async ({ cart }) => {
+    test('Functionality of State input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.stateInputField, testdata.state);
     });
 
 
-    test('Functionality of Country input field on Cart details page', async ({ cart }) => {
+    test('Functionality of Country input field under Shipping Address section on Cart details page', async ({ cart }) => {
         await reusable.verifyInputFill(cart.countryInputField, testdata.country);
+    });
+
+
+    test('Functionality of Credit Card Number input field under Payment Method section on Cart details page', async ({ cart }) => {
+        await reusable.verifyInputFill(cart.creditCardNumberInputField, testdata.creditCardNumber);
+    });
+
+
+    test('Functionality of Month dropdown under Payment Method section on Cart details page', async ({ cart }) => {
+        await cart.verifyMonthDropdownSelect();
+    });
+
+
+    test('Functionality of Year dropdown under Payment Method section on Cart details page', async ({ cart }) => {
+        await cart.verifyYearDropdownSelect();
+    });
+
+
+    test('Functionality of CVV input field under Payment Method section on Cart details page', async ({ cart }) => {
+        await reusable.verifyInputFill(cart.cardCvvInputField, testdata.creditCardCVV);
+    });
+
+
+    test('Functionality of Place Order button under Payment Method section on Cart details page', async ({ cart }) => {
+        await cart.verifyPlaceOrderButtonClick();
+    });
+
+
+    test('Functionality of Continue Shopping button under Payment Method section on Cart details page', async ({ cart }) => {
+        await cart.verifyContinueShoppingButtonClick();
+    });
+
+
+    test('Functionality of Empty Cart button under Payment Method section on Cart details page', async ({ cart }) => {
+        await cart.verifyEmptyCartButtonClick();
+    });
+
+
+    test('Functionality of 1st Item card under Recommended section on Cart details page', async ({ cart }) => {
+        await cart.verifyRecommendedItemClick();
     });
 
 
