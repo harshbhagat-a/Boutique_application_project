@@ -88,5 +88,19 @@ test.describe('Cart Page', () => {
     });
 
 
+    test('Filling all details on Cart details page', async ({ cart }) => {
+        await reusable.verifyInputFill(cart.emailInputField, testdata.email);
+        await reusable.verifyInputFill(cart.streetAddressInputField, testdata.streetAddress);
+        await reusable.verifyInputFill(cart.zipCodeInputFiled, testdata.zipCode);
+        await reusable.verifyInputFill(cart.cityInputField, testdata.city);
+        await reusable.verifyInputFill(cart.stateInputField, testdata.state);
+        await reusable.verifyInputFill(cart.countryInputField, testdata.country);
+        await reusable.verifyInputFill(cart.creditCardNumberInputField, testdata.creditCardNumber);
+        await cart.verifyMonthDropdownSelect();
+        await cart.verifyYearDropdownSelect();
+        await reusable.verifyInputFill(cart.cardCvvInputField, testdata.creditCardCVV);
+    });
+
+
 
 })

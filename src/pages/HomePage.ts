@@ -20,7 +20,6 @@ export class HomePage {
     quantityDropdown: Locator;
     continueShoppingButton: Locator;
     itemQuantity: Locator;
-    quantitySection: Locator
 
 
     constructor(private page: Page) {
@@ -38,8 +37,7 @@ export class HomePage {
         this.productDescription = this.page.locator('.product-wrapper p').nth(1);
         this.quantityDropdown = this.page.locator('#quantity');
         this.continueShoppingButton = this.page.getByRole('button', { name: ' Continue Shopping ' });
-        this.quantitySection = this.page.getByText('Quantity:');
-        this.itemQuantity = this.quantitySection.locator('.col').first();
+        this.itemQuantity = this.page.getByText('Quantity:');
 
 
     }

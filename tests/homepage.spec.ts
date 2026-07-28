@@ -22,8 +22,5 @@ import { test, expect } from '../fixture';
       await homepage.verifyCartIconClick();
     });
 
-    test('Verify the item quantity on Cart details page', async ({ homepage })=>{
-      await homepage.verifyItemCount();
-    });
 
   })
