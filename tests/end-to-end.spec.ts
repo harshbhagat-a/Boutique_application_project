@@ -1,4 +1,5 @@
 import { test, expect } from '../fixture';
+import { testdata } from '../utils/testdata';
 
   test.describe('Homepage Functionality', () => {
 
@@ -15,6 +16,36 @@ import { test, expect } from '../fixture';
       await homepage.verifyFirstProductClick();
       await productPage.verifyAddToCartButtonClick();
       await cart.verifyPlaceOrderButtonClick();
+    });
+
+
+    test('Verify Tank Top Sale advertised alert click o Product page', async ({ homepage, productPage }) => {
+        await homepage.selectProduct(testdata.products.tankTop);
+        await productPage.verifyTankTopSaleAdClick();
+    });
+
+
+    test('Verify Watch Sale advertised alert click o Product page', async ({ homepage, productPage }) => {
+        await homepage.selectProduct(testdata.products.watch);
+        await productPage.verifyWatchSaleAdClick();
+    });
+
+
+    test('Verify Loafers Sale advertised alert click o Product page', async ({ homepage, productPage }) => {
+        await homepage.selectProduct(testdata.products.loafers);
+        await productPage.verifyLoaferSaleAdClick();
+    });
+
+
+    test('Verify Candle Holder Sale advertised alert click o Product page', async ({ homepage, productPage }) => {
+        await homepage.selectProduct(testdata.products.candleHolder);
+        await productPage.verifyCandleHolderSaleAdClick();
+    });
+
+
+    test('Verify Mug Sale advertised alert click o Product page', async ({ homepage, productPage }) => {
+        await homepage.selectProduct(testdata.products.mug);
+        await productPage.verifyMugSaleAdClick();
     });
 
 

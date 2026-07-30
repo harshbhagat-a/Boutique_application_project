@@ -100,4 +100,10 @@ export class HomePage {
         }
     }
 
+
+    async selectProduct(productName: string) {
+    await expect(this.page.locator(`img[src*="${productName}.jpg"]`)).toBeVisible();
+    await this.page.locator(`img[src*="${productName}.jpg"]`).click();
+}
+
 }

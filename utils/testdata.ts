@@ -20,5 +20,17 @@ export const testdata = {
 
     creditCardCVV: '123',
 
+    products:{
+        sunglasses: 'sunglasses',
+        tankTop: 'tank-top',
+        watch: 'watch',
+        loafers: 'loafers',
+        hairDrier: 'hairdryer',
+        candleHolder: 'candle-holder',
+        saltShaker: 'salt-and-pepper-shakers',
+        jar: 'bamboo-glass-jar',
+        mug: 'mug',
+    },
+
 
 };
