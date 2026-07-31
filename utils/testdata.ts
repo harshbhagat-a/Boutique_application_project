@@ -33,4 +33,10 @@ export const testdata = {
     },
 
 
+    endpoints:{
+        cart: '/cart',
+        
+    }
+
+
 };

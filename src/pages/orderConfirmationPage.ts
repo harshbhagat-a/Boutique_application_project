@@ -8,6 +8,7 @@ export class OrderConfirmationPage {
     confirmationIdSection: Locator;
     trackingIdSection: Locator;
     totalAmountSection: Locator;
+amountSectionValue: Locator;
 
     constructor(private page: Page) {
         this.orderConfirmationHeading = this.page.getByRole('heading', { level: 3 });
@@ -16,6 +17,8 @@ export class OrderConfirmationPage {
         this.trackingIdSection = this.page.locator('.padding-y-24').nth(1);
         this.totalAmountSection = this.page.locator('.padding-y-24').last();
         this.continueShoppingButton = this.page.getByRole('button', { name: 'Continue Shopping' });
+        this.amountSectionValue = this.totalAmountSection.locator('.text-right');
+
 
 
     }
