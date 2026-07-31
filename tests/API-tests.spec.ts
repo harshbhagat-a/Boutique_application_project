@@ -14,7 +14,7 @@ test('Verify all Items', async ({ request }) => {
 });
 
 
-test.only('Verify Add to Cart API', async ({ request }) => {
+test('Verify Add to Cart API', async ({ request }) => {
     const productIds = getProductIds();
     const response = await request.post(
         `${process.env.BASE_URL}/cart`,
