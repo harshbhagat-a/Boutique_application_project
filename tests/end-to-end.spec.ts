@@ -59,4 +59,14 @@ import { testdata } from '../utils/testdata';
     });
 
 
+    test('Verify 2 items order flow', async ({ homepage, productPage, cart })=>{
+      await homepage.selectProduct(testdata.products.loafers)
+      await productPage.verifyAddToCartButtonClick();
+      await cart.verifyContinueShoppingButtonClick();
+      await homepage.selectProduct(testdata.products.saltShaker);
+      await productPage.verifyAddToCartButtonClick();
+      await cart.verifyPlaceOrderButtonClick();
+    });
+
+
 })

@@ -10,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   reporter: [['html'],['list'],] ,
   use: {
-    baseURL: process.env.BASE_URL || 'http://127.0.0.1:60891',
+    baseURL: process.env.BASE_URL || 'http://127.0.0.1:57265',
     headless: true,
     trace: 'on-first-retry',
   },

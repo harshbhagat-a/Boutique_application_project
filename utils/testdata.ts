@@ -18,7 +18,13 @@ export const testdata = {
 
     creditCardNumber: '4111 1111 1111 1111',
 
+    cardExpiryMonth: '02',
+
+    cardExpiryYear: '2035',
+
     creditCardCVV: '123',
+
+    yenCurrency: 'JPY',
 
     products:{
         sunglasses: 'sunglasses',
@@ -35,7 +41,9 @@ export const testdata = {
 
     endpoints:{
         cart: '/cart',
-        
+        cartEmpty: '/cart/empty',
+        checkout: '/cart/checkout',
+        currencyChange: '/setCurrency',
     }
 
 
