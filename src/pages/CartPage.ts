@@ -1,5 +1,8 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { testdata } from '../../utils/testdata';
+import { reusable } from '../../utils/ReusableMethod';
+import { HomePage } from './HomePage';
+import { ProductDetailPage } from './productDetailPage';
 
 export class CartPage {
 
@@ -28,6 +31,9 @@ export class CartPage {
     emptyCartSubtitle: Locator;
     continueShoppingButton: Locator;
     footerSection: Locator;
+    orderConfirmationHeading: any;
+    recommendedSectionItem: any;
+    itemQuantity: Locator;
 
     constructor(private page: Page) {
 
@@ -56,6 +62,9 @@ export class CartPage {
         this.emptyCartHeading = this.page.getByRole('heading', { name: 'Your shopping cart is empty!' });
         this.emptyCartSubtitle = this.page.locator('.empty-cart-section p');
         this.footerSection = this.page.locator('.footer-social').first();
+        this.orderConfirmationHeading = this.page.getByRole('heading',{level: 3});
+        this.recommendedSectionItem = this.youMayAlsoLikeSection.locator('.col-md-3');
+        this.itemQuantity = this.page.locator('[css="3"]');
 
     }
 
@@ -86,5 +95,56 @@ export class CartPage {
             }
         }
     }
+
+
+    async verifyMonthDropdownSelect(){
+        const month = await reusable.getCurrentMonth();
+        await this.cardExpiryMonthDropdown.click();
+        await this.cardExpiryMonthDropdown.selectOption(month);
+    }
+
+
+    async verifyYearDropdownSelect(){
+        const year = await reusable.getCurrentYear();
+        await this.cardExpiryYearDropdown.click();
+        await this.cardExpiryYearDropdown.selectOption(year);
+    }
+
+    async verifyPlaceOrderButtonClick(){
+        await expect(this.placeOrderButton).toBeVisible();
+        await this.placeOrderButton.click();
+        await expect(this.orderConfirmationHeading).toBeVisible();
+    }
+
+
+    async verifyContinueShoppingButtonClick(){
+        const homePage = new HomePage(this.page);
+        await expect(this.continueShoppingButton).toBeVisible();
+        await this.continueShoppingButton.click();
+        await expect(homePage.hotProductTitle).toBeVisible();
+    }
+
+
+    async verifyEmptyCartButtonClick(){
+        const homePage = new HomePage(this.page);
+        await expect(this.emptyCartButton).toBeVisible();
+        await this.emptyCartButton.click();
+        await expect(homePage.hotProductTitle).toBeVisible();
+    }
+
+
+    async verifyRecommendedItemClick(){
+        const homePage = new HomePage(this.page);
+        const itemCount = await this.recommendedSectionItem.count();
+        if(itemCount > 0){
+            await expect(this.recommendedSectionItem.first()).toBeVisible();
+            await this.recommendedSectionItem.first().click();
+            await expect(homePage.addToCartButton).toBeVisible();
+        }
+        else{
+            console.log('No item under Recommended Section');
+        }
+    }
+
 
 }

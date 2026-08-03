@@ -1,4 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { ProductDetailPage } from './productDetailPage';
+import { testdata } from '../../utils/testdata';
 
 export class HomePage {
 
@@ -17,6 +19,7 @@ export class HomePage {
     productDescription: Locator;
     quantityDropdown: Locator;
     continueShoppingButton: Locator;
+    itemQuantity: Locator;
 
 
     constructor(private page: Page) {
@@ -34,6 +37,7 @@ export class HomePage {
         this.productDescription = this.page.locator('.product-wrapper p').nth(1);
         this.quantityDropdown = this.page.locator('#quantity');
         this.continueShoppingButton = this.page.getByRole('button', { name: ' Continue Shopping ' });
+        this.itemQuantity = this.page.getByText('Quantity:');
 
 
     }
@@ -78,5 +82,28 @@ export class HomePage {
         await firstProductLocator.click();
         await expect(this.addToCartButton).toBeVisible();
     }
+
+
+    async verifyItemCount(){
+        const productDetail = new ProductDetailPage(this.page);
+        await this.verifyFirstProductClick();
+        await productDetail.verifyQuantityDropdownOptionSelect();
+        await productDetail.addToCartButton.click();
+        await expect(this.itemQuantity).toBeVisible();
+        const quantityText = await this.itemQuantity.textContent();
+        const quantity = quantityText?.replace('Quantity:', '').trim();
+        if(quantity === testdata.productQuantity){
+            console.log('Quantity matches')
+        }
+        else{
+            console.log('Quantity does not match')
+        }
+    }
+
+
+    async selectProduct(productName: string) {
+    await expect(this.page.locator(`img[src*="${productName}.jpg"]`)).toBeVisible();
+    await this.page.locator(`img[src*="${productName}.jpg"]`).click();
+}
 
 }

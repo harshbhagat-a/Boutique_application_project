@@ -13,7 +13,7 @@ test.describe('Product Details Page', () => {
     });
 
 
-    test('Verify product quantity increase on Product page', async ({ cart, productPage }) => {
+    test('Verify product quantity increase on Product page', async ({ productPage }) => {
         await productPage.verifyQuantityDropdownOptionSelect();
     });
 

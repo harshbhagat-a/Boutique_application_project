@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
@@ -8,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   reporter: [['html'],['list'],] ,
   use: {
-    baseURL: process.env.BASE_URL || 'http://127.0.0.1:54022',
+    baseURL: process.env.BASE_URL || 'http://127.0.0.1:57265',
     headless: true,
     trace: 'on-first-retry',
   },
@@ -32,7 +34,7 @@ export default defineConfig({
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   use: { ...devices['iPhone 15 Pro'] },
     // },
     // {
     //   name: 'Mobile Safari',

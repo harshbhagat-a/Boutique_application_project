@@ -1,7 +1,7 @@
 import { test, expect } from '../fixture';
 
   test.describe('Homepage Functionality', () => {
-    
+
 
     test.beforeEach(async ({ homepage }) => {
       await homepage.verifyHomePageNavigate();
@@ -21,5 +21,6 @@ import { test, expect } from '../fixture';
     test('Verify cart icon click on Home page', async ({ homepage, cart }) => {
       await homepage.verifyCartIconClick();
     });
+
 
   })
